@@ -27,6 +27,8 @@ st:
 	$(MAKE) -C ./st MAKEFLAGS=
 dmenu:
 	$(MAKE) -C ./dmenu MAKEFLAGS=
+slock:
+	$(MAKE) -C ./slock MAKEFLAGS=
 swim: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
@@ -35,6 +37,7 @@ clean:
 	$(MAKE) -C ./slstatus clean MAKEFLAGS=
 	$(MAKE) -C ./st clean MAKEFLAGS=
 	$(MAKE) -C ./dmenu clean MAKEFLAGS=
+	$(MAKE) -C ./slock clean MAKEFLAGS=
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
@@ -43,6 +46,7 @@ install: all
 	$(MAKE) -C ./slstatus install MAKEFLAGS=
 	$(MAKE) -C ./st install MAKEFLAGS=
 	$(MAKE) -C ./dmenu install MAKEFLAGS=
+	$(MAKE) -C ./slock install MAKEFLAGS=
 
 #	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 #	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
@@ -52,4 +56,4 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/swim
 #		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options clean install uninstall slstatus st dmenu
+.PHONY: all options clean install uninstall slstatus st dmenu slock
