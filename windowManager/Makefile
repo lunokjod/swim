@@ -6,7 +6,7 @@ include config.mk
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 
-all: options swim
+all: options slstatus swim
 
 options:
 	@echo swim build options:
@@ -21,7 +21,8 @@ ${OBJ}: config.h config.mk
 
 #config.h:
 #	cp config.def.h $@
-
+slstatus:
+	$(MAKE) -C ./slstatus MAKEFLAGS=
 swim: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
@@ -40,4 +41,4 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/swim
 #		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options clean install uninstall
+.PHONY: all options clean install uninstall slstatus
