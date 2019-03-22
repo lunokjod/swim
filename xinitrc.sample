@@ -1,0 +1,11 @@
+ulimit -c unlimited &
+feh --bg-fill ~/Pictures/hypnotoad-futurama-36101-1920x1200.jpg &
+~/bin/slstatus &
+while true; do
+	echo BEGIN `date` >> ~/log/dwm.log
+	echo BEGIN `date` >> ~/log/dwm-error.log
+	~/bin/dwm 1>>~/log/dwm.log 2>>~/log/dwm-error.log
+	sleep 0.5
+	echo END `date` >> ~/log/dwm.log
+	echo END `date` >> ~/log/dwm-error.log
+done
