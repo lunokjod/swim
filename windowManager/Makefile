@@ -23,16 +23,23 @@ ${OBJ}: config.h config.mk
 #	cp config.def.h $@
 slstatus:
 	$(MAKE) -C ./slstatus MAKEFLAGS=
+st:
+	$(MAKE) -C ./st MAKEFLAGS=
 swim: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
 	rm -f swim ${OBJ} swim-${VERSION}.tar.gz
+	$(MAKE) -C ./slstatus clean MAKEFLAGS=
+	$(MAKE) -C ./st clean MAKEFLAGS=
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f swim ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/swim
+	$(MAKE) -C ./slstatus install MAKEFLAGS=
+	$(MAKE) -C ./st install MAKEFLAGS=
+
 #	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 #	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 #	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
