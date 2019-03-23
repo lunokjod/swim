@@ -104,7 +104,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "st", "-e","/usr/bin/fish",NULL };
+static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 
 static const char *webbrowsercmd[]  = { "surf-open", NULL };
 static const char *mylockcmd[]  = { "slock", NULL };
@@ -117,7 +118,7 @@ static const char *myexitcmd[]  = { "killall","--signal","15","xinit", NULL };
 #endif
 
 static const char *mykillcmd[]  = { "xkill", NULL };
-static const char *screenshootcmd[]  = { "import","--root", "/home/sharek/Documents/Screenshoot.png", NULL };
+static const char *screenshootcmd[]  = { "import","-window","root", "/home/sharek/Documents/Screenshoot.png", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -128,10 +129,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = webbrowsercmd } }, // my_b start browser
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = mylockcmd } }, // my_n lockscreen
 	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = mykillcmd } },
+	
 	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = myexitcmd } },
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
+	
+
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY|ControlMask,           XK_b,      togglebar,      {0} },
-	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_s,      spawn,		   {.v = screenshootcmd } },
 
 	// layout
