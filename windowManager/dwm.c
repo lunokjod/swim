@@ -1218,8 +1218,9 @@ motionnotify(XEvent *e)
 	Monitor *m;
 	XMotionEvent *ev = &e->xmotion;
 
-	if (ev->window != root)
+	if (ev->window != root) {
 		return;
+	}
 	if ((m = recttomon(ev->x_root, ev->y_root, 1, 1)) != mon && mon) {
 		unfocus(selmon->sel, 1);
 		selmon = m;
@@ -1263,8 +1264,12 @@ movemouse(const Arg *arg)
 			}
 			lasttime = ev.xmotion.time;
 
+
 			nx = ocx + (ev.xmotion.x - x);
 			ny = ocy + (ev.xmotion.y - y);
+			// coords ok at this point
+			//slog("Motion? nx:%d ny:%d"EOL, nx, ny);
+
 			if (abs(selmon->wx - nx) < snap) {
 				nx = selmon->wx;
 			}
@@ -1277,6 +1282,7 @@ movemouse(const Arg *arg)
 			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap) {
 				ny = selmon->wy + selmon->wh - HEIGHT(c);
 			}
+
 			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
 			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap)) {
 				togglefloating(NULL);
@@ -1371,7 +1377,8 @@ recttomon(int x, int y, int w, int h)
 void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
-	if (applysizehints(c, &x, &y, &w, &h, interact))
+	// the bug is here!
+	//if (applysizehints(c, &x, &y, &w, &h, interact)) 
 		resizeclient(c, x, y, w, h);
 }
 
