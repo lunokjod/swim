@@ -47,7 +47,6 @@ public:
 };
 */
 
-
 void drw_image(Drw *drw, Window win, char *imgdata, int x, int y, int w, int h, int invert) {
 	if (!drw || !drw->scheme) {
 		return;

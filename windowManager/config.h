@@ -1,3 +1,6 @@
+#ifndef __SWIM__CONFIG__
+#define __SWIM__CONFIG__
+
 //#define CLASSIC
 #define DEBUG
 #define LINUX
@@ -120,6 +123,10 @@ static const char *myexitcmd[]  = { "killall","--signal","15","xinit", NULL };
 static const char *mykillcmd[]  = { "xkill", NULL };
 static const char *screenshootcmd[]  = { "import","-window","root", "/home/sharek/Documents/Screenshoot.png", NULL };
 
+static const char *mynightmodecmd[]  = { "xrandr","--output", "eDP-1", "--gamma","1.1:0.8:0.7", "--brightness", "0.8", NULL };
+static const char *mydaymodecmd[]  = { "xrandr","--output", "eDP-1", "--gamma","1.1:1.0:1.0", "--brightness", "1.0", NULL };
+
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 
@@ -127,12 +134,17 @@ static Key keys[] = {
 	{ MODKEY,	                    XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = webbrowsercmd } }, // my_b start browser
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = mylockcmd } }, // my_n lockscreen
+
 	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = mykillcmd } },
 	
 	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = myexitcmd } },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
+
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = mylockcmd } }, // my_n lockscreen
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
+
+	{ MODKEY|ControlMask,           XK_n,      spawn,          {.v = mynightmodecmd } },
+	{ MODKEY|ControlMask,           XK_d,      spawn,          {.v = mydaymodecmd } },
 	
 
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -197,3 +209,4 @@ static Button buttons[] = {
 //	{ ClkRootWin,           0,              Button1,        spawn,          {.v = termcmd } },
 };
 
+#endif
