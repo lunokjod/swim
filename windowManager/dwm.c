@@ -1485,9 +1485,12 @@ run(void)
 	XEvent ev;
 	/* main event loop */
 	XSync(dpy, False);
-	while (running && !XNextEvent(dpy, &ev))
-		if (handler[ev.type])
+	while (running && !XNextEvent(dpy, &ev)) {
+		if (handler[ev.type]) {
 			handler[ev.type](&ev); /* call handler */
+		}
+		checkDayNightMonitorMode();
+	}
 }
 
 void

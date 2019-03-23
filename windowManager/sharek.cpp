@@ -3,8 +3,10 @@
 #include <string.h>
 #include <X11/Xlib.h>
 #include <X11/Xft/Xft.h>
+#include <time.h>
 
 #include "sharek.hpp"
+
 
 // layout icons
 #include "res/layout_cascade.xbm"
@@ -46,7 +48,48 @@ public:
 	}
 };
 */
+unsigned int duskTime = 19 *60*60; // from 20h
+unsigned int nightTime = 20 *60*60; // to 21h
+unsigned int lastMode = 0; // 0 day, 1 dusk, 2 night
 
+time_t
+day_seconds() {
+    time_t t1, t2;
+    struct tm tms;
+    time(&t1);
+    localtime_r(&t1, &tms);
+    tms.tm_hour = 0;
+    tms.tm_min = 0;
+    tms.tm_sec = 0;
+    t2 = mktime(&tms);
+    return t1 - t2;
+}
+
+void checkDayNightMonitorMode() {
+
+	time_t secondsTilMidnight =  day_seconds();
+	if ( secondsTilMidnight > nightTime ) {
+		// night mode!
+		if ( 2 != lastMode ) {
+			fprintf(stdout, "Night mode"EOL);
+			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8");
+			lastMode = 2;
+		}
+	} else if ( secondsTilMidnight > duskTime ) {
+		// dusk mode (incremental)
+		if ( 1 != lastMode ) {
+			fprintf(stdout, "Dusk mode"EOL);
+			lastMode = 1;
+	    }
+	} else {
+		// day mode!
+		if ( 0 != lastMode ) {
+			fprintf(stdout, "Day mode"EOL);
+			spawn("xrandr --output eDP-1 --gamma 1.0:1.0:1.0 --brightness 1.0");
+			lastMode = 0;
+		}
+	}
+}
 void drw_image(Drw *drw, Window win, char *imgdata, int x, int y, int w, int h, int invert) {
 	if (!drw || !drw->scheme) {
 		return;
