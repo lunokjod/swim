@@ -48,9 +48,19 @@ public:
 	}
 };
 */
+
+void lockAndSuspend() {
+//	static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
+// static const char *mylockcmd[]  = { "slock", NULL };
+	fprintf(stdout, "Lock and suspend!"EOL);
+	spawn("slock");
+	spawn("systemctl suspend");
+}
+
 unsigned int duskTime = 19 *60*60; // from 20h
 unsigned int nightTime = 20 *60*60; // to 21h
 unsigned int lastMode = 0; // 0 day, 1 dusk, 2 night
+unsigned int dawnTime = 6 *60*60; // and again from 6h
 
 time_t
 day_seconds() {
@@ -68,6 +78,7 @@ day_seconds() {
 void checkDayNightMonitorMode() {
 
 	time_t secondsTilMidnight =  day_seconds();
+
 	if ( secondsTilMidnight > nightTime ) {
 		// night mode!
 		if ( 2 != lastMode ) {
@@ -79,9 +90,19 @@ void checkDayNightMonitorMode() {
 		// dusk mode (incremental)
 		if ( 1 != lastMode ) {
 			fprintf(stdout, "Dusk mode"EOL);
+			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8");
 			lastMode = 1;
 	    }
-	} else {
+	} else if ( secondsTilMidnight < dawnTime ) {
+		// dawn mode (incremental)
+		if ( 3 != lastMode ) {
+			fprintf(stdout, "Dawn mode"EOL);
+			// use night mode by now
+			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8");
+			lastMode = 3;
+	    }
+	}
+	else {
 		// day mode!
 		if ( 0 != lastMode ) {
 			fprintf(stdout, "Day mode"EOL);
