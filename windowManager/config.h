@@ -107,8 +107,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", "-e","/usr/bin/fish",NULL };
-
+//static const char *termcmd[]  = { "st","-e","/usr/bin/fish", "-t", "'TharMinaL'",NULL };
+static const char *termcmd[]  = { "st","-e","/usr/bin/fish", NULL };
 static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 static const char *mylockcmd[]  = { "slock", NULL };
 
