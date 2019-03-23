@@ -225,7 +225,7 @@ size_t rightPadding = 0;
 //		drw_image(drw, drw->drawable, (char*)battery_empty_img_bits, m->ww - rightPadding, 1, battery_empty_img_width, battery_empty_img_height, 0);
 //		int imagePart = battLevel * battery_img_width / 100;
 //		slog("battLevel * battery_img_width / 100: %d * %d / 100 = %d"EOL, battLevel, battery_img_width, imagePart);
-		if ( battLevel < 20 ) {
+		if ( battLevel < 16 ) {
 			drw_setscheme(drw, scheme[SchemeAlert]);
 		}
 
@@ -463,8 +463,8 @@ void sharek_init() {
 }
 
 void sharek_deinit() {
-	slog("dealloc testPixmap: %p <- %ld"EOL, (void*)drw->dpy, testPixmap);
-	XFreePixmap(drw->dpy, testPixmap);
+	//slog("dealloc testPixmap: %p <- %ld"EOL, (void*)drw->dpy, testPixmap);
+	//XFreePixmap(drw->dpy, testPixmap);
 
 	slog("-> See you soon!"EOL);
 	fclose(logd);

@@ -19,7 +19,7 @@ FILE *logd = NULL;
 #endif
 
 
-Pixmap testPixmap;
+//Pixmap testPixmap;
 
 float brightness = 1.0;
 
