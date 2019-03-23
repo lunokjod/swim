@@ -6,7 +6,7 @@ include config.mk
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 
-all: options slstatus swim
+all: options slstatus st slock dmenu swim
 
 options:
 	@echo swim build options:
