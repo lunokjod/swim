@@ -59,7 +59,7 @@ void lockAndSuspend() {
 
 unsigned int duskTime = 19 *60*60; // from 20h
 unsigned int nightTime = 20 *60*60; // to 21h
-unsigned int lastMode = 0; // 0 day, 1 dusk, 2 night
+unsigned int lastMode = 4; // 0 day, 1 dusk, 2 night 3 is dawn // 4 is invalid, force the change of gamma on start
 unsigned int dawnTime = 6 *60*60; // and again from 6h
 
 time_t
@@ -90,7 +90,7 @@ void checkDayNightMonitorMode() {
 		// dusk mode (incremental)
 		if ( 1 != lastMode ) {
 			fprintf(stdout, "Dusk mode"EOL);
-			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8");
+			spawn("xrandr --output eDP-1 --gamma 1.1:0.9:0.8 --brightness 0.9");
 			lastMode = 1;
 	    }
 	} else if ( secondsTilMidnight < dawnTime ) {
@@ -98,7 +98,7 @@ void checkDayNightMonitorMode() {
 		if ( 3 != lastMode ) {
 			fprintf(stdout, "Dawn mode"EOL);
 			// use night mode by now
-			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8");
+			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.7");
 			lastMode = 3;
 	    }
 	}

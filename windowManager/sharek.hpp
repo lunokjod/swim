@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#define LOGFILENAME "/home/sharek/log/dwm-sharek.log"
+#define LOGFILENAME "/home/sharek/log/swim.log"
 
 #define EOL "\n"
 
