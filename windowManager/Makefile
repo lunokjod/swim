@@ -29,6 +29,9 @@ dmenu:
 	$(MAKE) -C ./dmenu MAKEFLAGS=
 slock:
 	$(MAKE) -C ./slock MAKEFLAGS=
+feh:
+	$(MAKE) -C ./feh MAKEFLAGS=
+	$(MAKE) -C ./feh install app=1 MAKEFLAGS=
 swim: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
@@ -38,6 +41,7 @@ clean:
 	$(MAKE) -C ./st clean MAKEFLAGS=
 	$(MAKE) -C ./dmenu clean MAKEFLAGS=
 	$(MAKE) -C ./slock clean MAKEFLAGS=
+	$(MAKE) -C ./feh clean MAKEFLAGS=
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
@@ -56,4 +60,4 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/swim
 #		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options clean install uninstall slstatus st dmenu slock
+.PHONY: all options clean install uninstall slstatus st dmenu slock feh
