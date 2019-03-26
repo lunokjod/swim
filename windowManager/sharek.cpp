@@ -398,6 +398,12 @@ void sharekDrawbar(Monitor *m) {
 	int x = 0;
 	int w;
 	int urg =0; // hardcoded denote no urgent notification enabled @TODO
+	for (c = m->clients; c; c = c->next) {
+		occ |= c->tags;
+		if (c->isurgent)
+			urg |= c->tags;
+	}
+	
 	for (int i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeActive]);
