@@ -299,9 +299,11 @@ applyrules(Client *c)
 		{
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
+			// interesting loop for search
 			for (m = mons; m && m->num != r->monitor; m = m->next);
-			if (m)
+			if (m) {
 				c->mon = m;
+			}
 		}
 	}
 	if (ch.res_class)
@@ -380,23 +382,28 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 void
 arrange(Monitor *m)
 {
-	if (m)
+	if (m) {
 		showhide(m->stack);
-	else for (m = mons; m; m = m->next)
+	}
+	else for (m = mons; m; m = m->next){
 		showhide(m->stack);
+	}
+
 	if (m) {
 		arrangemon(m);
 		restack(m);
-	} else for (m = mons; m; m = m->next)
+	} else for (m = mons; m; m = m->next) {
 		arrangemon(m);
+	}
 }
 
 void
 arrangemon(Monitor *m)
 {
 	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
-	if (m->lt[m->sellt]->arrange)
+	if (m->lt[m->sellt]->arrange){
 		m->lt[m->sellt]->arrange(m);
+	}
 }
 
 void
@@ -431,9 +438,9 @@ buttonpress(XEvent *e)
 	}
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
-		do
+		do  {
 			x += TEXTW(tags[i]);
-		while (ev->x >= x && ++i < LENGTH(tags));
+		} while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
