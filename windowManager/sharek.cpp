@@ -49,6 +49,9 @@ public:
 };
 */
 
+Atom getatomprop(Client *c, Atom prop);
+
+
 void lockAndSuspend() {
 //	static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 // static const char *mylockcmd[]  = { "slock", NULL };
@@ -471,8 +474,10 @@ void sharekDrawbar(Monitor *m) {
 	// draw title
 /*
 	//@TODO extract icon from _NET_WM_ICON
-	auto shit = getatomprop(netatom[NetWMIcon]);
 */
+//	Atom shit = getatomprop(selmon->sel->win , netatom[NetWMIcon]);
+//	fprintf(stdout, "Obtained icon!"EOL);
+
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
