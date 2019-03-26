@@ -60,10 +60,10 @@ void lockAndSuspend() {
 	spawn("systemctl suspend");
 }
 
-unsigned int duskTime = 19 *60*60; // from 20h
-unsigned int nightTime = 20 *60*60; // to 21h
+unsigned int duskTime = 19 *60*60; // from 19h
+unsigned int nightTime = 20 *60*60; // to 20h
 unsigned int lastMode = 4; // 0 day, 1 dusk, 2 night 3 is dawn // 4 is invalid, force the change of gamma on start
-unsigned int dawnTime = 7 *60*60; // and again from 6h
+unsigned int dawnTime = 6 *60*60; // and again from 6h
 
 time_t
 day_seconds() {
@@ -384,25 +384,26 @@ void sharekDrawbar(Monitor *m) {
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	
-	Client *c;
 	unsigned int occ = 0;
+	int urg =0;
+
+	Client *c;
 	for (c = m->clients; c; c = c->next) {
+		// occ OR c->tags 
 		occ |= c->tags;
-		/*
 		if (c->isurgent) {
+			// not on my selected tags
 			urg |= c->tags;
-		}*/
+		}
 	}
+	// occ contains if tag have cliens
+	// urg if urgent is out of my selected tags
 
 	// draw tags
 	int x = 0;
 	int w;
-	int urg =0; // hardcoded denote no urgent notification enabled @TODO
-	for (c = m->clients; c; c = c->next) {
-		occ |= c->tags;
-		if (c->isurgent)
-			urg |= c->tags;
-	}
+
+
 	
 	for (int i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
@@ -410,7 +411,7 @@ void sharekDrawbar(Monitor *m) {
 
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 
-		// draw tags decorations
+		// have client(s) under this tag?
 		if (occ & 1 << i) {
 
 			// upper line
