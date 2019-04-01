@@ -6,7 +6,7 @@ include config.mk
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 
-all: options slstatus st slock dmenu swim
+all: options slstatus st slock dmenu swim wmname
 
 options:
 	@echo swim build options:
@@ -42,6 +42,7 @@ clean:
 	$(MAKE) -C ./dmenu clean MAKEFLAGS=
 	$(MAKE) -C ./slock clean MAKEFLAGS=
 	$(MAKE) -C ./feh clean MAKEFLAGS=
+	$(MAKE) -C ./wmname clean MAKEFLAGS=
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
@@ -51,6 +52,8 @@ install: all
 	$(MAKE) -C ./st install MAKEFLAGS=
 	$(MAKE) -C ./dmenu install MAKEFLAGS=
 	$(MAKE) -C ./slock install MAKEFLAGS=
+	$(MAKE) -C ./wmname install MAKEFLAGS=
+	
 
 #	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 #	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
@@ -60,4 +63,4 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/swim
 #		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options clean install uninstall slstatus st dmenu slock feh
+.PHONY: all options clean install uninstall slstatus st dmenu slock feh vmname

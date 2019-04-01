@@ -52,11 +52,12 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",       NULL,       NULL,       1 ,           0,           -1 },
 	{ "Sublime_text",  NULL,       NULL,       2 ,           0,           -1 },
-	{ "Evince",        NULL,       NULL,       1 << 3 ,      0,           -1 },
+	{ "Evince",        NULL,       NULL,       0 ,           0,           -1 },
 //	{ "st-256color",   NULL,       NULL,       1 << 2 ,      0,           -1 },
 	{ "Thunderbird",   NULL,       NULL,       1 << 8 ,      0,           -1 },
 	{ "Surf",   	   NULL,       NULL,       0      ,      0,           -1 },
 	{ "tabbed-surf",   NULL,       NULL,       0      ,      0,           -1 },
+	{ "gnote",         NULL,       NULL,       1 << 7 ,      1,           -1 },
 	{ "xpad",          NULL,       NULL,       0      ,      1,           -1 },
 	{ "Telegram",      NULL,       NULL,       1 << 8 ,      0,           -1 },
 
