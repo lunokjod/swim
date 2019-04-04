@@ -57,9 +57,10 @@ static const Rule rules[] = {
 	{ "Thunderbird",   NULL,       NULL,       1 << 8 ,      0,           -1 },
 	{ "Surf",   	   NULL,       NULL,       0      ,      0,           -1 },
 	{ "tabbed-surf",   NULL,       NULL,       0      ,      0,           -1 },
-	{ "gnote",         NULL,       NULL,       1 << 7 ,      1,           -1 },
+//	{ "gnote",         NULL,       NULL,       1 << 7 ,      1,           -1 },
 	{ "xpad",          NULL,       NULL,       0      ,      1,           -1 },
-	{ "Telegram",      NULL,       NULL,       1 << 8 ,      0,           -1 },
+	{ "Telegram",      NULL,       NULL,       1 << 7 ,      0,           -1 },
+	{ "st",            NULL,       "dmesg",    1 << 8 ,      0,           -1 },
 
 /* in case of no rules */
 //	{ NULL,		NULL,		NULL,		0,				False,			-1},
@@ -109,7 +110,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //static const char *termcmd[]  = { "st","-e","/usr/bin/fish", "-t", "'TharMinaL'",NULL };
-static const char *termcmd[]  = { "st","-e","/usr/bin/fish", NULL };
+static const char *termcmd[]  = { "st","-T","terminal","-e","/usr/bin/fish", NULL };
 static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 static const char *mylockcmd[]  = { "slock", NULL };
 
