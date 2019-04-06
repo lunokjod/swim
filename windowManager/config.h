@@ -54,13 +54,14 @@ static const Rule rules[] = {
 	{ "Sublime_text",  NULL,       NULL,       2 ,           0,           -1 },
 	{ "Evince",        NULL,       NULL,       0 ,           0,           -1 },
 //	{ "st-256color",   NULL,       NULL,       1 << 2 ,      0,           -1 },
-	{ "Thunderbird",   NULL,       NULL,       1 << 8 ,      0,           -1 },
+	{ "Thunderbird",   NULL,       NULL,       1 << 6 ,      0,           -1 },
 	{ "Surf",   	   NULL,       NULL,       0      ,      0,           -1 },
 	{ "tabbed-surf",   NULL,       NULL,       0      ,      0,           -1 },
 //	{ "gnote",         NULL,       NULL,       1 << 7 ,      1,           -1 },
 	{ "xpad",          NULL,       NULL,       0      ,      1,           -1 },
 	{ "Telegram",      NULL,       NULL,       1 << 7 ,      0,           -1 },
-	{ "st",            NULL,       "dmesg",    1 << 8 ,      0,           -1 },
+	{ "st",            NULL,       "dmesg-log",1 << 8 ,      0,           -1 },
+	{ "st",            NULL,       "swim-log", 1 << 8 ,      0,           -1 },
 
 /* in case of no rules */
 //	{ NULL,		NULL,		NULL,		0,				False,			-1},
