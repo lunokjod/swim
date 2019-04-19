@@ -58,18 +58,18 @@ int main(int argc, char*argv[]) {
 	char * maxBrightnessFileName = malloc(strlen(rootNode)+strlen(device)+strlen(maxBrightnessFile));
 	sprintf(maxBrightnessFileName, "%s%s%s", rootNode, device, maxBrightnessFile);
 	int maxValue = GetValue(maxBrightnessFileName);
-	fprintf(stdout, "file: %s\n", maxBrightnessFileName);
+//	fprintf(stdout, "file: %s\n", maxBrightnessFileName);
 	free(maxBrightnessFileName);
-	fprintf(stdout, "MaxValue? %d\n", maxValue);
+//	fprintf(stdout, "MaxValue? %d\n", maxValue);
 
 	char * currentBrightnessFileName = malloc(strlen(rootNode)+strlen(device)+strlen(currentFile));
 	sprintf(currentBrightnessFileName, "%s%s%s", rootNode, device, currentFile);
 	int currentValue = GetValue(currentBrightnessFileName);
-	fprintf(stdout, "file: %s\n", currentBrightnessFileName);
+//	fprintf(stdout, "file: %s\n", currentBrightnessFileName);
 	free(currentBrightnessFileName);
-	fprintf(stdout, "CurrentValue? %d\n", currentValue);
+//	fprintf(stdout, "CurrentValue? %d\n", currentValue);
 
-	fprintf(stdout, "Direction: %s\n",direction?"Up":"Down");
+//	fprintf(stdout, "Direction: %s\n",direction?"Up":"Down");
  	int increment = 3000;
  	if ( false == direction ) {
  		increment=increment*-1;
@@ -78,13 +78,13 @@ int main(int argc, char*argv[]) {
  	if ( finalValue > maxValue) {
  		finalValue = maxValue;
  	}
-	fprintf(stdout, "NuValue: %d\n",finalValue);
+//	fprintf(stdout, "NuValue: %d\n",finalValue);
 
 
 	char * changeFileName = malloc(strlen(rootNode)+strlen(device)+strlen(changeFile));
 	sprintf(changeFileName, "%s%s%s", rootNode, device, changeFile);
 	PutValue(changeFileName, finalValue);
-	fprintf(stdout, "file: %s\n", changeFileName);
+//	fprintf(stdout, "file: %s\n", changeFileName);
 	free(changeFileName);
 
 
