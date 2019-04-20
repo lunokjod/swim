@@ -162,8 +162,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_b,      togglebar,      {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_s,      spawn,		   {.v = screenshootcmd } },
 
-	{ MODKEY,	                    XK_Right,   spawn,          {.v = mybrightnessUpcmd } },
-	{ MODKEY,	                    XK_Left,    spawn,          {.v = mybrightnessDowncmd } },
+	{ MODKEY,	                    XK_Left,   spawn,          {.v = mybrightnessUpcmd } },
+	{ MODKEY,	                    XK_Right,    spawn,          {.v = mybrightnessDowncmd } },
 
 
 	// layout
