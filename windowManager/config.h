@@ -134,6 +134,10 @@ static const char *mydaymodecmd[]  = { "xrandr","--output", "eDP-1", "--gamma","
 static const char *mybrightnessUpcmd[]  = { "brightness","up", NULL };
 static const char *mybrightnessDowncmd[]  = { "brightness","down", NULL };
 
+static const char *myaudioUpcmd[]    = { "amixer","-q","sset","Master","3%+", NULL };
+static const char *myaudioDowncmd[]  = { "amixer","-q","sset","Master","3%-", NULL };
+
+
 // keys on /usr/include/X11/keysymdef.h
 
 static Key keys[] = {
@@ -163,7 +167,9 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_s,      spawn,		   {.v = screenshootcmd } },
 
 	{ MODKEY,	                    XK_Left,   spawn,          {.v = mybrightnessUpcmd } },
-	{ MODKEY,	                    XK_Right,    spawn,          {.v = mybrightnessDowncmd } },
+	{ MODKEY,	                    XK_Right,  spawn,          {.v = mybrightnessDowncmd } },
+	{ MODKEY,	                    XK_Up,     spawn,          {.v = myaudioUpcmd } },
+	{ MODKEY,	                    XK_Down,   spawn,          {.v = myaudioDowncmd } },
 
 
 	// layout
