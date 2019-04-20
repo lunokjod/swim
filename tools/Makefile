@@ -1,5 +1,6 @@
 PREFIX = /home/sharek
-all: brightness
+all: tools
+tools: brightness
 brightness:
 	gcc brightness.c -o brightness
 install:
@@ -10,5 +11,5 @@ install:
 	sudo chmod u+s ${DESTDIR}${PREFIX}/bin/brightness
 	
 clean:
-	@rm brightness
-.PHONY: all clean install brightness
+	@rm brightness || true
+.PHONY: all clean install tools brightness

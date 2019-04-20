@@ -2,12 +2,11 @@ windowManager:
 	$(MAKE) -C ./windowManager MAKEFLAGS=
 surf:
 	$(MAKE) -C ./surf MAKEFLAGS=
-tools:
-	$(MAKE) -C ./tools MAKEFLAGS=
-all: windowManager surf tools
+all: windowManager surf
 install:
 	$(MAKE) -C ./windowManager install MAKEFLAGS=
 	$(MAKE) -C ./surf install MAKEFLAGS=
+	$(MAKE) -C ./tools all MAKEFLAGS=
 	$(MAKE) -C ./tools install MAKEFLAGS=
 clean:
 	$(MAKE) -C ./windowManager clean MAKEFLAGS=
