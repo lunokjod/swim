@@ -5,6 +5,7 @@
 #include <X11/Xft/Xft.h>
 #include <time.h>
 
+#include "config.h"
 #include "sharek.hpp"
 
 
@@ -56,8 +57,8 @@ void lockAndSuspend() {
 //	static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 // static const char *mylockcmd[]  = { "slock", NULL };
 	fprintf(stdout, "Lock and suspend!"EOL);
-	spawn("slock");
-	spawn("systemctl suspend");
+	system("systemctl suspend");
+	system("slock");
 }
 
 unsigned int duskTime = 19 *60*60; // from 19h
@@ -82,18 +83,23 @@ void checkDayNightMonitorMode() {
 
 	time_t secondsTilMidnight =  day_seconds();
 
+	static const char night[]  = "xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8";
+	static const char day[]    = "xrandr --output eDP-1 --gamma 1.1:1.0:1.0 --brightness 1.0";
+	static const char dusk[]   = "xrandr --output eDP-1 --gamma 1.1:0.9:0.8 --brightness 0.9";
+	static const char dawn[]   = "xrandr --output eDP-1 --gamma 1.1:0.9:0.8 --brightness 0.9";
+
 	if ( secondsTilMidnight > nightTime ) {
 		// night mode!
 		if ( 2 != lastMode ) {
 			fprintf(stdout, "Night mode"EOL);
-			spawn("xrandr --output eDP-1 --gamma 1.1:0.8:0.7 --brightness 0.8");
+			system(night);
 			lastMode = 2;
 		}
 	} else if ( secondsTilMidnight > duskTime ) {
 		// dusk mode (decremental)
 		if ( 1 != lastMode ) {
 			fprintf(stdout, "Dusk mode"EOL);
-			spawn("xrandr --output eDP-1 --gamma 1.1:0.9:0.8 --brightness 0.9");
+			system(dusk);
 			lastMode = 1;
 	    }
 	} else if ( secondsTilMidnight < dawnTime ) {
@@ -101,7 +107,7 @@ void checkDayNightMonitorMode() {
 		if ( 3 != lastMode ) {
 			fprintf(stdout, "Dawn mode"EOL);
 			// use night mode by now
-			spawn("xrandr --output eDP-1 --gamma 1.1:0.9:0.8 --brightness 0.9");
+			system(dawn);
 			lastMode = 3;
 	    }
 	}
@@ -109,7 +115,7 @@ void checkDayNightMonitorMode() {
 		// day mode!
 		if ( 0 != lastMode ) {
 			fprintf(stdout, "Day mode"EOL);
-			spawn("xrandr --output eDP-1 --gamma 1.0:1.0:1.0 --brightness 1.0");
+			system(day);
 			lastMode = 0;
 		}
 	}

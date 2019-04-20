@@ -111,7 +111,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //static const char *termcmd[]  = { "st","-e","/usr/bin/fish", "-t", "'TharMinaL'",NULL };
-static const char *termcmd[]  = { "st","-T","terminal","-e","/usr/bin/fish", NULL };
+//static const char *termcmd[]  = { "st","-T","terminal","-e","/usr/bin/fish", NULL };
+static const char *termcmd[]  = { "st","-T","terminal","-e","tmux", NULL };
 static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 static const char *mylockcmd[]  = { "slock", NULL };
 
@@ -125,11 +126,15 @@ static const char *myexitcmd[]  = { "killall","--signal","15","xinit", NULL };
 #endif
 
 static const char *mykillcmd[]  = { "xkill", NULL };
-static const char *screenshootcmd[]  = { "import","-window","root", "/home/sharek/Documents/Screenshoot.png", NULL };
+static const char *screenshootcmd[]  = { "import","-window","root", "/home/sharek/img/Screenshoot.png", NULL };
 
 static const char *mynightmodecmd[]  = { "xrandr","--output", "eDP-1", "--gamma","1.1:0.8:0.7", "--brightness", "0.8", NULL };
 static const char *mydaymodecmd[]  = { "xrandr","--output", "eDP-1", "--gamma","1.1:1.0:1.0", "--brightness", "1.0", NULL };
 
+static const char *mybrightnessUpcmd[]  = { "brightness","up", NULL };
+static const char *mybrightnessDowncmd[]  = { "brightness","down", NULL };
+
+// keys on /usr/include/X11/keysymdef.h
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -147,7 +152,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = mylockcmd } }, // my_n lockscreen
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
 
-//	{ MODKEY|ShiftMask,             XK_s,      lockAndSuspend,  {0} },
+	{ MODKEY|ShiftMask,             XK_s,      lockAndSuspend,  {0} },
 
 	{ MODKEY|ControlMask,           XK_n,      spawn,          {.v = mynightmodecmd } },
 	{ MODKEY|ControlMask,           XK_d,      spawn,          {.v = mydaymodecmd } },
@@ -156,6 +161,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY|ControlMask,           XK_b,      togglebar,      {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_s,      spawn,		   {.v = screenshootcmd } },
+
+	{ MODKEY,	                    XK_Right,   spawn,          {.v = mybrightnessUpcmd } },
+	{ MODKEY,	                    XK_Left,    spawn,          {.v = mybrightnessDowncmd } },
+
 
 	// layout
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
