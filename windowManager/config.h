@@ -154,7 +154,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
 
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = mylockcmd } }, // my_n lockscreen
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
+	//{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = suspendcmd } },
 
 	{ MODKEY|ShiftMask,             XK_s,      lockAndSuspend,  {0} },
 
