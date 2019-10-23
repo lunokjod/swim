@@ -113,6 +113,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 //static const char *termcmd[]  = { "st","-e","/usr/bin/fish", "-t", "'TharMinaL'",NULL };
 //static const char *termcmd[]  = { "st","-T","terminal","-e","/usr/bin/fish", NULL };
 static const char *termcmd[]  = { "st","-T","terminal","-e","tmux", NULL };
+static const char *termcmd2[] = { "st", NULL };
 static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
 static const char *mylockcmd[]  = { "slock", NULL };
 
@@ -145,8 +146,9 @@ static Key keys[] = {
 
 	// basic commands
 	{ MODKEY,	                    XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = webbrowsercmd } }, // my_b start browser
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd  } },
+    { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd2 } },
+    { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = webbrowsercmd } }, // my_b start browser
 
 	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = mykillcmd } },
 	
