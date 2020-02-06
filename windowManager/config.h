@@ -114,6 +114,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //static const char *termcmd[]  = { "st","-e","/usr/bin/fish", "-t", "'TharMinaL'",NULL };
 //static const char *termcmd[]  = { "st","-T","terminal","-e","/usr/bin/fish", NULL };
+static const char *termcmd3[]  = { "st","-e","tmux", "-t","\"terminal-`pidof st | wc -w`\"", NULL };
 static const char *termcmd[]  = { "st","-T","terminal","-e","tmux", NULL };
 static const char *termcmd2[] = { "st", NULL };
 static const char *suspendcmd[]  = { "systemctl", "suspend",NULL };
@@ -150,6 +151,7 @@ static Key keys[] = {
 	{ MODKEY,	                    XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd  } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd2 } },
+    //{ MODKEY,                       XK_Return, spawn,          {.v = termcmd3 } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = webbrowsercmd } }, // my_b start browser
 
 	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = mykillcmd } },
