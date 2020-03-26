@@ -488,8 +488,8 @@ void sharekDrawbar(Monitor *m) {
 /*
 	//@TODO extract icon from _NET_WM_ICON
 */
-//	Atom shit = getatomprop(selmon->sel->win , netatom[NetWMIcon]);
-//	fprintf(stdout, "Obtained icon!"EOL);
+	Atom shit = getatomprop(selmon->sel->win , netatom[NetWMIcon]);
+	fprintf(stdout, "Obtained icon!"EOL);
 
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
